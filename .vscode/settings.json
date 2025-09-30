@@ -1,0 +1,31 @@
+{
+    "black-formatter.args": [
+        "--line-length=120"
+    ],
+    "flake8.severity": {
+        "E": "Warning",
+        "E9": "Error",
+        "F4": "Warning",
+        "F841": "Warning"
+    },
+    "flake8.args": [
+        "--max-line-length=120",
+        "--ignore=E203,W503",
+    ],
+    "open-in-browser.default": "google chrome",
+    "python.analysis.typeCheckingMode": "basic",
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit",
+        "source.unusedImports": "explicit",
+    },
+    "isort.args": [
+        "--profile",
+        "black"
+    ],
+    "python.envFile": "${workspaceFolder}/.env"
+}
