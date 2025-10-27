@@ -26,7 +26,9 @@ class ResnetBlock(nn.Module):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return self._pre_activation(x) if self.is_pre_activation else self._post_activation(x)
 
-    def _post_activation(self, x: torch.Tensor) -> torch.Tensor:
+    def _post_activation(self, x: torch.Tensor) -> torch.Tensor:  
+        # conv → batchnorm → ReLU → conv → batchnorm → skip connection → ReLU
+        # original ResNet block structure
         out = F.relu(self.bn1(self.conv1(x)))
         out = self.bn2(self.conv2(out))
         z = x if self.downsample is None else self.downsample(x)
@@ -36,6 +38,8 @@ class ResnetBlock(nn.Module):
         return out
 
     def _pre_activation(self, x: torch.Tensor) -> torch.Tensor:
+        # batchnorm → ReLU → conv → batchnorm → ReLU → conv → skip connection
+        # improved ResNet block structure
         out = self.conv1(F.relu(self.bn1(x)))
         out = self.conv2(F.relu(self.bn2(out)))
         z = x if self.downsample is None else self.downsample(x)

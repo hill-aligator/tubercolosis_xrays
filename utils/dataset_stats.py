@@ -2,7 +2,7 @@ from typing import Iterable, Sequence
 import torch
 
 
-def get_mean_std(data: Sequence[tuple[torch.Tensor, int]]) -> tuple[torch.Tensor, torch.Tensor]:
+def get_mean_std(data: Sequence[tuple[torch.Tensor, int]]) -> tuple[torch.Tensor, torch.Tensor]:    
     n_channels = data[0][0].shape[0]
     n_pixels = 0
     sum_channels = torch.zeros(n_channels)
@@ -20,9 +20,7 @@ def get_mean_std(data: Sequence[tuple[torch.Tensor, int]]) -> tuple[torch.Tensor
     return mean, std
 
 
-def get_min_max_sizes(
-    data: Iterable[tuple[torch.Tensor, int]],
-) -> tuple[int, int, int, int]:
+def get_min_max_sizes(data: Iterable[tuple[torch.Tensor, int]]) -> tuple[int, int, int, int]:    
     min_height: int = 10_0000
     min_width = 10_0000
     max_height = -1
@@ -42,7 +40,7 @@ def get_min_max_sizes(
     return min_height, min_width, max_height, max_width
 
 
-def summarize_stats(data: Iterable[tuple[torch.Tensor, int]]) -> str:
+def summarize_stats(data: Sequence[tuple[torch.Tensor, int]]) -> str:
     min_height, min_width, max_height, max_width = get_min_max_sizes(data)
     mean, std = get_mean_std(data)
 
